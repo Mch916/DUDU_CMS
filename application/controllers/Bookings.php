@@ -1,4 +1,3 @@
-<!-- Copy cat -->
 <?php
 
 class Bookings extends CI_Controller
