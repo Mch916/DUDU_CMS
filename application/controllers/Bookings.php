@@ -200,6 +200,7 @@ class Bookings extends CI_Controller
      public function get_staff($staffNumber)
      {
 
+       
      }
 
 }
