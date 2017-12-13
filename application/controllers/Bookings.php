@@ -1,5 +1,4 @@
-<!-- Hi -->
-<!-- hello ar b copy -->
+<!-- Copy cat -->
 <?php
 
 class Bookings extends CI_Controller
