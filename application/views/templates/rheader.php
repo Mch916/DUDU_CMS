@@ -92,17 +92,15 @@
     						<li><a href="#0">Income</a></li>
     					</ul>
     				</li>
-    				<li class="has-children images">
-    					<a href="#0">Admin</a>
-    					<ul>
-    						<li><a href="<?php echo base_url('staff');?>">Staff</a></li>
-    						<li><a href="<?php echo base_url('user');?>">Login</a></li>
+            <?php if($this->session->userdata('username') == 'admin') : ?>
+    				<li class="has-children users">
+    					<a href="#0">Users</a>
+              <ul>
+    						<li><a href="<?php echo site_url('users/create');?>">Create User</a></li>
+    						<li><a href="<?php echo site_url('users/edit');?>">Edit User</a></li>
     					</ul>
     				</li>
-
-    				<li class="has-children users">
-    					<a href="#0">Other</a>
-    				</li>
+            <?php endif; ?>
     			</ul>
 
                 <ul>

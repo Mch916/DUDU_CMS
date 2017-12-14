@@ -38,9 +38,7 @@ class Users extends CI_Controller
             if ($haveUser->num_rows() == 0) {
                 //if user not exist, return error
                 $this->session->set_flashdata('login_error', 'User does not exist.');
-                $this->load->view('templates/rheader.php');
-                $this->load->view('user/login.php');
-                $this->load->view('templates/rfooter.php');
+                redirect('users/login');
             }else {
 
                 $userRow = $haveUser->row();
@@ -55,9 +53,7 @@ class Users extends CI_Controller
 
                 }else {
                     $this->session->set_flashdata('login_error', 'Password incorrect.');
-                    $this->load->view('templates/rheader.php');
-                    $this->load->view('user/login.php');
-                    $this->load->view('templates/rfooter.php');
+                    redirect('users/login');
                 }
             }
         }
@@ -65,10 +61,39 @@ class Users extends CI_Controller
 
     public function logout()
     {
-      $userdata = array('username', 'login');
-      $this->session->unset_userdata($userdata);
+        $userdata = array('username', 'login');
+        $this->session->unset_userdata($userdata);
 
-      redirect(site_url('users/login'));
+        redirect(site_url('users/login'));
+    }
+
+    public function create()
+    {
+        $userName = $this->input->post('usernameCreate');
+        $password = md5($this->input->post('passwordCreate'));
+
+        //validation rules
+        $this->form_validation->set_rules( 'usernameCreate', 'Username', 'required|is_unique[user.userName]',
+        array('is_unique[user.userName]' => 'This username already exist.'));
+        $this->form_validation->set_rules( 'passwordCreate', 'Password', 'required');
+        $this->form_validation->set_rules( 'passwordConfirm', 'Confirm Password', 'required|matches[passwordCreate]',
+        array('matches[passwordCreate]' => 'Confirm password is not matching with the password entered'));
+
+        if ($this->form_validation->run() === false) {
+            $this->load->view('templates/rheader.php');
+            $this->load->view('user/create.php');
+            $this->load->view('templates/rfooter.php');
+        }else {
+            $this->user_model->add_user($userName, $password);
+
+            $this->session->set_flashdata('user_created', 'User '.$userName.' created');
+            redirect('users/create');
+        }
+    }
+
+    public function edit()
+    {
+
     }
 }
 
