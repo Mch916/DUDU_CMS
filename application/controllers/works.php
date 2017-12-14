@@ -8,6 +8,9 @@ class Works extends CI_Controller {
 
       public function index()
       {
+          if(!$this->session->userdata('login')) {
+              redirect('users/login');
+          }
           $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');
@@ -17,6 +20,10 @@ class Works extends CI_Controller {
 
       public function mobile()
       {
+          if(!$this->session->userdata('login')) {
+              redirect('users/login');
+          }
+          
           $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');

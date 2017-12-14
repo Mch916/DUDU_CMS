@@ -10,6 +10,10 @@ class Dashboard extends CI_Controller
 
     public function index()
     {
+        if(!$this->session->userdata('login')) {
+            redirect('users/login');
+        }
+        
         $data['title'] = 'Dashboard';
         // $data['staffs'] = $this->staff_model->get_staff();
 

@@ -13,6 +13,10 @@ class Users extends CI_Controller
 
     public function login()
     {
+        if($this->session->userdata('login') === true) {
+            redirect('dashboard');
+        }
+
         $userName = $this->input->post('user_name');
         if ($userName == 'admin') {
             $password = $this->input->post('password');
@@ -37,25 +41,25 @@ class Users extends CI_Controller
                 $this->load->view('templates/rheader.php');
                 $this->load->view('user/login.php');
                 $this->load->view('templates/rfooter.php');
-            }
-            $userRow = $haveUser->row();
-            if ($password == $userRow->password) {
-                //password correct
-                $userdata = array(
-                    'username' => $userName,
-                    'login' => true
-                );
-                $this->session->set_userdata($userdata);
-                redirect(site_url('dashboard'));
-
             }else {
-                $this->session->set_flashdata('login_error', 'Password incorrect.');
-                $this->load->view('templates/rheader.php');
-                $this->load->view('user/login.php');
-                $this->load->view('templates/rfooter.php');
+
+                $userRow = $haveUser->row();
+                if ($password == $userRow->password) {
+                    //password correct
+                    $userdata = array(
+                        'username' => $userName,
+                        'login' => true
+                    );
+                    $this->session->set_userdata($userdata);
+                    redirect(site_url('dashboard'));
+
+                }else {
+                    $this->session->set_flashdata('login_error', 'Password incorrect.');
+                    $this->load->view('templates/rheader.php');
+                    $this->load->view('user/login.php');
+                    $this->load->view('templates/rfooter.php');
+                }
             }
-
-
         }
     }
 

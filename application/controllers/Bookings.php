@@ -12,6 +12,10 @@ class Bookings extends CI_Controller
 
     public function index()
     {
+          if(!$this->session->userdata('login')) {
+              redirect('users/login');
+          }
+
           $data['staff'] = $this->work_model->get_staff();
 
           $this->load->view('templates/rheader');
@@ -21,11 +25,15 @@ class Bookings extends CI_Controller
 
     public function mobile()
     {
-       $data['staff'] = $this->work_model->get_staff();
+          if(!$this->session->userdata('login')) {
+              redirect('users/login');
+          }
 
-       $this->load->view('templates/rheader');
-       $this->load->view('booking/mobile.php', $data);
-       $this->load->view('templates/rfooter');
+           $data['staff'] = $this->work_model->get_staff();
+
+           $this->load->view('templates/rheader');
+           $this->load->view('booking/mobile.php', $data);
+           $this->load->view('templates/rfooter');
      }
 
     public function get_events($confirm = 0)
