@@ -32,10 +32,10 @@ class Booking_Model extends CI_Model
         $this->db->where("ID", $id)->delete("booking");
       }
 
-      public function get_acc()
-      {
-        return $this->db->get("account")->result_array();
-      }
+      // public function get_acc()
+      // {
+      //   return $this->db->get("account")->result_array();
+      // }
 
 }
 

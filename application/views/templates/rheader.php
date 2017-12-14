@@ -48,6 +48,7 @@
     		<nav class="cd-nav">
     			<ul class="cd-top-nav">
     				<li><a href="http://dudupartyroomhk.com/">Website</a></li>
+            <?php if($this->session->userdata('login')) : ?>
     				<li class="has-children account">
     					<a href="#0">
     						<img src="<?php echo base_url('image/cd-avatar.png');?>" alt="avatar">
@@ -58,10 +59,12 @@
     						<li><a href="#0">Logout</a></li>
     					</ul>
     				</li>
+          <?php endif; ?>
     			</ul>
     		</nav>
     	</header> <!-- .cd-main-header -->
 
+      <?php if($this->session->userdata('login')) : ?>
     	<main class="cd-main-content">
     		<nav class="cd-side-nav" style="z-index:9;">
     			<ul>
@@ -107,5 +110,6 @@
     				<li class="action-btn"><a href="<?php echo base_url('index.php/dashboard');?>">+ Button</a></li>
     			</ul>
     		</nav>
+      <?php endif; ?>
 
     		<div class="content-wrapper">
