@@ -27,7 +27,7 @@ class Users extends CI_Controller
         if ($this->form_validation->run() === false) {
             $this->load->view('templates/rheader.php');
             $this->load->view('user/login.php');
-            $this->load->view('templates/rheader.php');
+            $this->load->view('templates/rfooter.php');
         }else {
             //check if this user exist
             $haveUser = $this->user_model->get_user($userName);
@@ -36,7 +36,7 @@ class Users extends CI_Controller
                 $this->session->set_flashdata('login_error', 'User does not exist.');
                 $this->load->view('templates/rheader.php');
                 $this->load->view('user/login.php');
-                $this->load->view('templates/rheader.php');
+                $this->load->view('templates/rfooter.php');
             }
             $userRow = $haveUser->row();
             if ($password == $userRow->password) {
@@ -52,11 +52,19 @@ class Users extends CI_Controller
                 $this->session->set_flashdata('login_error', 'Password incorrect.');
                 $this->load->view('templates/rheader.php');
                 $this->load->view('user/login.php');
-                $this->load->view('templates/rheader.php');
+                $this->load->view('templates/rfooter.php');
             }
 
 
         }
+    }
+
+    public function logout()
+    {
+      $userdata = array('username', 'login');
+      $this->session->unset_userdata($userdata);
+
+      redirect(site_url('users/login'));
     }
 }
 

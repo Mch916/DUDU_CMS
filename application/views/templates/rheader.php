@@ -56,7 +56,7 @@
     					</a>
     					<ul>
     						<li><a href="#0">Edit Account</a></li>
-    						<li><a href="#0">Logout</a></li>
+    						<li><a href="<?php echo base_url('index.php/users/logout');?>">Logout</a></li>
     					</ul>
     				</li>
           <?php endif; ?>
