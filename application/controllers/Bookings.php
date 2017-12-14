@@ -4,23 +4,24 @@
 class Bookings extends CI_Controller
 {
 
-     public function __construct() {
+    public function __construct()
+    {
         Parent::__construct();
         $this->load->model("booking_model");
         $this->load->model("work_model");
     }
 
-     public function index()
-     {
+    public function index()
+    {
           $data['staff'] = $this->work_model->get_staff();
 
           $this->load->view('templates/rheader');
           $this->load->view('booking/index.php', $data);
           $this->load->view('templates/rfooter');
-     }
+    }
 
-     public function mobile()
-     {
+    public function mobile()
+    {
        $data['staff'] = $this->work_model->get_staff();
 
        $this->load->view('templates/rheader');
@@ -28,8 +29,8 @@ class Bookings extends CI_Controller
        $this->load->view('templates/rfooter');
      }
 
-     public function get_events($confirm = 0)
-     {
+    public function get_events($confirm = 0)
+    {
           // Our Start and End Dates
           $start = $this->input->get("start");
           $end = $this->input->get("end");
@@ -118,7 +119,7 @@ class Bookings extends CI_Controller
     }
 
     public function edit_event()
-     {
+    {
           $eventid = intval($this->input->post("eventid"));
           $event = $this->booking_model->get_event($eventid);
           if($event->num_rows() == 0) {
@@ -181,8 +182,8 @@ class Bookings extends CI_Controller
           redirect(site_url("bookings"));
      }
 
-     public function update_by_drag()
-     {
+    public function update_by_drag()
+    {
           $start = $this->input->get("start");
           $end = $this->input->get("end");
           $id = $this->input->get("bookingID");
@@ -198,8 +199,8 @@ class Bookings extends CI_Controller
 
      }
 
-     public function get_staff($staffNumber)
-     {
+    public function get_staff($staffNumber)
+    {
 
 
      }
