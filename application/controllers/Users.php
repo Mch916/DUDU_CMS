@@ -74,10 +74,10 @@ class Users extends CI_Controller
 
         //validation rules
         $this->form_validation->set_rules( 'usernameCreate', 'Username', 'required|is_unique[user.userName]',
-        array('is_unique[user.userName]' => 'This username already exist.'));
+        array('is_unique' => 'This username already exist.'));
         $this->form_validation->set_rules( 'passwordCreate', 'Password', 'required');
         $this->form_validation->set_rules( 'passwordConfirm', 'Confirm Password', 'required|matches[passwordCreate]',
-        array('matches[passwordCreate]' => 'Confirm password is not matching with the password entered'));
+        array('matches' => 'Confirm password is not matching with the password entered'));
 
         if ($this->form_validation->run() === false) {
             $this->load->view('templates/rheader.php');
@@ -93,8 +93,57 @@ class Users extends CI_Controller
 
     public function edit()
     {
+        $userID = $this->input->post('chooseUser');
+        $userName = $this->input->post('usernameEdit');
+        $password = md5($this->input->post('passwordEdit'));
+        $delete = $this->input->post('delete');
 
+        //validation rules
+        $this->form_validation->set_rules( 'usernameEdit', 'Username', array('required',
+          function() {
+                $users = $this->user_model->get_users();
+                $userID = $this->input->post('chooseUser');
+                $userName = $this->input->post('usernameEdit');
+                foreach ($users as $user) {
+                    if ($user['user_id'] == $userID && $user['userName'] == $userName) {
+                        return true;
+                    }elseif ($user['userName'] == $userName) {
+                        return false;
+                    }elseif ($user['userName'] != $userName) {
+                        return true;
+                    }
+                }
+            }));
+
+        if ($this->form_validation->run() === false) {
+
+            $data['users'] = $this->user_model->get_users();
+
+            $this->load->view('templates/rheader.php');
+            $this->load->view('user/edit.php', $data);
+            $this->load->view('templates/rfooter.php');
+
+        }else {
+
+            if(!$delete){
+                if ($this->input->post('passwordEdit') == "") {
+                    $this->user_model->edit_user($userID, $userName, false);
+                }else {
+                    $this->user_model->edit_user($userID, $userName, $password);
+                }
+
+                $this->session->set_flashdata('user_edited', 'User '.$userName.' edited');
+                redirect('users/edit');
+
+            }else {
+                $this->user_model->delete_user($userID);
+
+                $this->session->set_flashdata('user_deleted', 'User deleted');
+                redirect('users/edit');
+            }
+        }
     }
+    
 }
 
 
