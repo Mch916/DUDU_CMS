@@ -19,7 +19,7 @@ class Bookings extends CI_Controller
           $data['staff'] = $this->work_model->get_staff();
 
           $this->load->view('templates/rheader');
-          $this->load->view('booking/index.php', $data);
+          $this->load->view('booking.php', $data);
           $this->load->view('templates/rfooter');
     }
 
@@ -32,7 +32,7 @@ class Bookings extends CI_Controller
            $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');
-           $this->load->view('booking/mobile.php', $data);
+           $this->load->view('mobile/booking.php', $data);
            $this->load->view('templates/rfooter');
      }
 
