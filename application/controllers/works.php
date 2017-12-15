@@ -14,7 +14,7 @@ class Works extends CI_Controller {
           $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');
-           $this->load->view('works/index.php', $data);
+           $this->load->view('work.php', $data);
            $this->load->view('templates/rfooter');
       }
 
@@ -27,7 +27,7 @@ class Works extends CI_Controller {
           $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');
-           $this->load->view('works/mobile.php', $data);
+           $this->load->view('mobile/work.php', $data);
            $this->load->view('templates/rfooter');
       }
 
