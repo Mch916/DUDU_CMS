@@ -2,6 +2,9 @@
   <?php if($userEdit = $this->session->flashdata('user_edited')): ?>
   <?php echo '<p class="alert alert-success" id="">'.$userEdit.'</p>'; ?>
   <?php endif; ?>
+  <?php if($userDelete = $this->session->flashdata('user_deleted')): ?>
+  <?php echo '<p class="alert alert-success" id="">'.$userDelete.'</p>'; ?>
+  <?php endif; ?>
   <?php echo validation_errors(); ?>
   <?php echo form_open(site_url('users/edit')); ?>
   <div class="row">
@@ -19,7 +22,7 @@
         <div class="form-group">
           <label for="">Change username</label>
           <input type="text" name="usernameEdit" class="form-control" autocomplete="off"
-          placeholder="Enter username to change or just leave it blank" id="username">
+          placeholder="Enter username to change" id="username">
         </div>
         <div class="form-group">
           <label for="">Change password</label>

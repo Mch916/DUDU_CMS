@@ -99,21 +99,7 @@ class Users extends CI_Controller
         $delete = $this->input->post('delete');
 
         //validation rules
-        $this->form_validation->set_rules( 'usernameEdit', 'Username', array('required',
-          function() {
-                $users = $this->user_model->get_users();
-                $userID = $this->input->post('chooseUser');
-                $userName = $this->input->post('usernameEdit');
-                foreach ($users as $user) {
-                    if ($user['user_id'] == $userID && $user['userName'] == $userName) {
-                        return true;
-                    }elseif ($user['userName'] == $userName) {
-                        return false;
-                    }elseif ($user['userName'] != $userName) {
-                        return true;
-                    }
-                }
-            }));
+        $this->form_validation->set_rules( 'usernameEdit', 'Username', 'required|callback_username_duplicate['.$userID.']');
 
         if ($this->form_validation->run() === false) {
 
@@ -143,7 +129,23 @@ class Users extends CI_Controller
             }
         }
     }
-    
+
+    public function username_duplicate($value, $id)
+    {
+          $users = $this->user_model->get_users();
+
+          foreach ($users as $user) {
+              if ($user['user_id'] == $id && $user['userName'] == $value) {
+                  return true;
+              }elseif ($user['userName'] == $value) {
+                  $this->form_validation->set_message('username_duplicate', 'The username already exist.');
+                  return false;
+              }elseif ($user['userName'] != $value) {
+                  return true;
+              }
+          }
+    }
+
 }
 
 
