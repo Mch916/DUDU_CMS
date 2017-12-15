@@ -23,7 +23,7 @@ class Works extends CI_Controller {
           if(!$this->session->userdata('login')) {
               redirect('users/login');
           }
-          
+
           $data['staff'] = $this->work_model->get_staff();
 
            $this->load->view('templates/rheader');

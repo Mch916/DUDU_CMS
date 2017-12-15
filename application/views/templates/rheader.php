@@ -52,7 +52,7 @@
     				<li class="has-children account">
     					<a href="#0">
     						<img src="<?php echo base_url('image/cd-avatar.png');?>" alt="avatar">
-    						Account
+    						<?php echo $this->session->userdata('username');?>
     					</a>
     					<ul>
     						<li><a href="#0">Edit Account</a></li>
