@@ -10,7 +10,7 @@ class Booking_Model extends CI_Model
       public function get_events($start, $end, $isConfirm = null)
       {
           $this->db->where("start >=", $start)->where("end <=", $end);
-          if ($isConfirm)
+          if ($isConfirm !== null)
           {
               $this->db->where("isConfirm", $isConfirm);
           }
