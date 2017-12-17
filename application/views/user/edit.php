@@ -30,8 +30,8 @@
           placeholder="Enter password or just leave it blank">
         </div>
         <div class="form-group">
-          <label>Delete</label>
-          <input type="checkbox" name="delete" value="1">
+          <label for="delete">Delete</label>
+          <input type="checkbox" name="delete" value="1" id="delete">
         </div>
         <button class="btn btn-primary" type="submit">Submit change</button>
     </div>

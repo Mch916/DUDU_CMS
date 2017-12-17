@@ -55,7 +55,7 @@
     						<?php echo $this->session->userdata('username');?>
     					</a>
     					<ul>
-    						<li><a href="#0">Edit Account</a></li>
+    						<li><a href="<?php echo site_url('users/change_pw');?>">Edit Account</a></li>
     						<li><a href="<?php echo base_url('index.php/users/logout');?>">Logout</a></li>
     					</ul>
     				</li>

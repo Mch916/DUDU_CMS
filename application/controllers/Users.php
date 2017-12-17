@@ -46,6 +46,7 @@ class Users extends CI_Controller
                     //password correct
                     $userdata = array(
                         'username' => $userName,
+                        'userID' => $userRow->user_id,
                         'login' => true
                     );
                     $this->session->set_userdata($userdata);
@@ -144,6 +145,24 @@ class Users extends CI_Controller
                   return true;
               }
           }
+    }
+
+    public function change_pw()
+    {
+        $currentPW = md5($this->input->post('currentPW')); //not for admin
+        $newPW = md5($this->input->post('newPW'));
+        $username = $this->input->post('username');
+
+        $UserRow = $this->user_model->get_user($username)->row();
+        //check if the current password match
+        if ($currentPW == $UserRow->password) {
+            
+        }else {
+            $this->session->set_flashdata('pw_error', 'The current password you entered is not correct');
+            redirect('users/change_pw');
+        }
+
+
     }
 
 }
