@@ -4,11 +4,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>DuDu Party Room</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- external javascript files -->
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-
-        <script type="text/javascript" src="<?php echo base_url('js/jquery-2.1.4.js');?>" ></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('js/jquery.menu-aim.js');?>" ></script>
         <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('js/main.js');?>" ></script>
