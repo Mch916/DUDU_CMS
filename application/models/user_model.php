@@ -41,6 +41,11 @@ class User_model extends CI_Model
   {
       $this->db->where('user_id', $userID)->delete('user');
   }
+
+  public function changePW($userID, $password)
+  {
+      $this->db->where('user_id', $userID)->update('user', array('password' => $password));
+  }
 }
 
 

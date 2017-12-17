@@ -46,6 +46,7 @@ class Users extends CI_Controller
                     //password correct
                     $userdata = array(
                         'username' => $userName,
+                        'userID' => $userRow->user_id,
                         'login' => true
                     );
                     $this->session->set_userdata($userdata);
@@ -144,6 +145,38 @@ class Users extends CI_Controller
                   return true;
               }
           }
+    }
+
+    public function change_pw()
+    {
+        if ($this->session->userdata('username') == 'admin') {
+            $currentPW = $this->input->post('currentPW');
+        }else {
+            $currentPW = md5($this->input->post('currentPW'));
+        }
+        $newPW = md5($this->input->post('newPW'));
+
+        $this->form_validation->set_rules('currentPW', 'Current password', 'required');
+        $this->form_validation->set_rules('newPW', 'New password', 'required');
+        $this->form_validation->set_rules('newPWConfirm', 'Confirm new password', 'required|matches[newPW]');
+
+        if($this->form_validation->run() === false) {
+            $this->load->view('templates/rheader.php');
+            $this->load->view('user/change_pw.php');
+            $this->load->view('templates/rfooter.php');
+        }else {
+            $UserRow = $this->user_model->get_user($this->session->userdata('username'))->row();
+            //check if the current password match
+            if ($currentPW == $UserRow->password) {
+                $this->user_model->changePW($this->session->userdata('userID'), $newPW);
+                $this->session->set_flashdata('changePW', 'Password updated');
+                redirect('users/change_pw');
+            }else {
+                $this->session->set_flashdata('pw_error', 'The current password you entered is not correct');
+                redirect('users/change_pw');
+            }
+        }
+
     }
 
 }
