@@ -90,7 +90,7 @@ jQuery(document).ready(function(){
 
 	function moveNavigation(){
   		var mq = checkMQ();
-        
+
         if ( mq == 'mobile' && topNavigation.parents('.cd-side-nav').length == 0 ) {
         	detachElements();
 			topNavigation.appendTo(sidebar);
@@ -116,7 +116,7 @@ jQuery(document).ready(function(){
 
 	function checkScrollbarPosition() {
 		var mq = checkMQ();
-		
+
 		if( mq != 'mobile' ) {
 			var sidebarHeight = sidebar.outerHeight(),
 				windowHeight = $(window).height(),
@@ -127,4 +127,76 @@ jQuery(document).ready(function(){
 		}
 		scrolling = false;
 	}
+
+    // load_report_data = function (){
+    //     $.ajax({
+    //         url: 'load_report_data',
+    //         type: 'POST',
+    //         data: {
+    //           user_name: $('.report_data').val()
+    //         },
+    //         error: function(xhr) {
+    //           alert('Ajax request 發生錯誤');
+    //         },
+    //         success: function(response) {
+    //
+	// 			console.log(JSON.stringify(response));
+    //             $('.report_data').html(JSON.stringify(response));
+    //             $('.report_data').fadeIn();
+    //
+    //         }
+    //     });
+    // };
+	// load_report_data();
+
+	var table = $('#example').DataTable( {
+        "processing": false,
+        "serverSide": false,
+		"scrollX": true,
+		"paging":   true,
+        "ordering": true,
+        "info":     false,
+        "ajax": {
+            "url": "load_report_data",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "id" },
+			{ "data": "title" },
+			{ "data": "end" },
+			{ "data": "start" },
+			{ "data": "people" },
+			{ "data": "drinks" },
+			{ "data": "isConfirm" },
+			{ "data": "total_amt" },
+			{ "data": "deposit" },
+			{ "data": "payment_status" },
+			{ "data": "deposit_acc" },
+			{ "data": "final_acc" },
+			{ "data": "remarks" }
+        ]
+    } );
+
+// 	// Create the select list and search operation
+// var select = $('<select />')
+//     .appendTo(
+//         table.column( 0 ).footer()
+//     )
+//     .on( 'change', function () {
+//         table
+//             .column( 0 )
+//             .search( $(this).val() )
+//             .draw();
+//     } );
+//
+// // Get the search data for the first column and add to the select list
+// table
+//     .column( 0 )
+//     .cache( 'search' )
+//     .sort()
+//     .unique()
+//     .each( function ( d ) {
+//         select.append( $('<option value="'+d+'">'+d+'</option>') );
+//     } );
+
 });

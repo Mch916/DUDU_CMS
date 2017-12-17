@@ -7,9 +7,14 @@ class Booking_Model extends CI_Model
         $this->load->database();
       }
 
-      public function get_events($start, $end, $isConfirm)
+      public function get_events($start, $end, $isConfirm = null)
       {
-        return $this->db->where("start >=", $start)->where("end <=", $end)->where("isConfirm", $isConfirm)->get("booking");
+          $this->db->where("start >=", $start)->where("end <=", $end);
+          if ($isConfirm)
+          {
+              $this->db->where("isConfirm", $isConfirm);
+          }
+          return $this->db->get("booking");
       }
 
       public function add_event($data)

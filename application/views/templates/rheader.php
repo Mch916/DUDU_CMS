@@ -6,16 +6,20 @@
         <title>DuDu Party Room</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <!-- external javascript files -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
         <script type="text/javascript" src="<?php echo base_url('js/jquery-2.1.4.js');?>" ></script>
         <script type="text/javascript" src="<?php echo base_url('js/jquery.menu-aim.js');?>" ></script>
+        <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('js/main.js');?>" ></script>
         <script type="text/javascript" src="<?php echo base_url('js/modernizr.js');?>" ></script>
-        <script type="text/javascript" src="<?php echo base_url('js/staff.js');?>" ></script>
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url('js/common.js');?>" ></script>
+
         <!-- external css files -->
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/sidebar.css');?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/mobile.css');?>">
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
         <style>
           .fc-content {
             cursor: pointer;
@@ -88,7 +92,7 @@
     				<li class="has-children bookmarks">
     					<a href="#0">Report</a>
     					<ul>
-    						<li><a href="#0">Party Room</a></li>
+    						<li><a href="<?php echo site_url('report/index');?>">Party Room</a></li>
     						<li><a href="#0">Income</a></li>
     					</ul>
     				</li>
