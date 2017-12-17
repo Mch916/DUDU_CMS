@@ -25,7 +25,6 @@
           <input type="password" name="newPWConfirm" class="form-control" autocomplete="off"
           placeholder="Re-enter the new password">
         </div>
-        <input type="hidden" value="<?php echo $this->session->userdata('username'); ?>" name="username">
         <button class="btn btn-primary" type="submit">Submit change</button>
     </div>
   </div>
