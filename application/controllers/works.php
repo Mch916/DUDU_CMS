@@ -54,6 +54,7 @@ class Works extends CI_Controller {
                         'title' => $work->staff,
                         'start' => $work->start,
                         'end' => $work->end,
+                        'pay' => $work->pay,
                         'staffID' => $work->staffID,
                         'remarks' => $work->workRemark
                   );
@@ -68,6 +69,7 @@ class Works extends CI_Controller {
               $staff = $this->input->post("staff", TRUE);
               $start = $this->input->post("start", TRUE);
               $end = $this->input->post("end", TRUE);
+              $pay = $this->input->post('payAdd');
               $remarks = $this->input->post("remarks", TRUE);
 
               $staffSelect = $this->work_model->get_staff($staff);
@@ -84,6 +86,7 @@ class Works extends CI_Controller {
                  "staff" => $staffSelect->staffName,
                  "start" => $start,
                  "end" => $end,
+                 "pay" => $pay,
                  "staffID" => $staffSelect->staffID,
                  "workRemark" => $remarks
                  )
@@ -110,6 +113,7 @@ class Works extends CI_Controller {
             $start = $this->input->post("start", TRUE);
             $end = $this->input->post("end", TRUE);
             $remarks = $this->input->post("remarks", TRUE);
+            $pay = $this->input->post('editPay');
             $delete = intval($this->input->post("delete"));
 
             if(!$delete) {
@@ -128,6 +132,7 @@ class Works extends CI_Controller {
                      "staff" => $staffSelect->staffName,
                      "start" => $start,
                      "end" => $end,
+                     "pay" => $pay,
                      "staffID" => $staffSelect->staffID,
                      "workRemark" => $remarks
                      )

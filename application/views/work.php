@@ -40,6 +40,12 @@
             </div>
     </div>
     <div class="form-group">
+            <label class="col-md-4">Pay HK$</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="payAdd" id="">
+            </div>
+    </div>
+    <div class="form-group">
             <label class="col-md-4">Remarks</label>
             <div class="col-md-8">
                 <input type="text" class="form-control" name="remarks">
@@ -77,6 +83,9 @@
       <div class="col-md-4">Work End-time:</div><div id="workingEnd" class="col-md-8"></div>
     </div>
     <div class="row">
+      <div class="col-md-4">Pay HK$</div><div id="workingPay" class="col-md-8"></div>
+    </div>
+    <div class="row">
       <div class="col-md-4">Remarks:</div><div id="workingRemarks" class="col-md-8"></div>
     </div>
   </div>
@@ -103,6 +112,12 @@
             <div class="col-md-8 input-append date form_datetime">
                 <input required type="text" class="form-control" name="end" id="editWorkEnd">
                 <span class="add-on"><i class="icon-calendar"></i></span>
+            </div>
+    </div>
+    <div class="form-group">
+            <label class="col-md-4">Pay HK$</label>
+            <div class="col-md-8">
+                <input type="text" class="form-control" name="pay" id="editPay">
             </div>
     </div>
     <div class="form-group">
@@ -214,6 +229,7 @@ $('#calendar').fullCalendar({
       $('#workingStaff').html(event.title);
       $('#workingStart').html(moment(event.start).format('YYYY-MM-DD HH:mm'));
       $('#workingEnd').html(moment(event.end).format('YYYY-MM-DD HH:mm'));
+      $('#workingPay').html(event.pay);
       $('#workingStaffID').html(event.staffID);
       $('#workingRemarks').html(event.remarks);
 
@@ -221,6 +237,7 @@ $('#calendar').fullCalendar({
       $('#editWorkStart').val(moment(event.start).format('YYYY-MM-DD HH:mm'));
       $('#editWorkEnd').val(moment(event.end).format('YYYY-MM-DD HH:mm'));
       $('#editWorkRemarks').val(event.remarks);
+      $('#editPay').val(event.pay);
 
       $('#event_id').val(event.id);
       $('#editModal').modal();
