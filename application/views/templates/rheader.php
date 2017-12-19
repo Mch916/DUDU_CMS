@@ -80,7 +80,7 @@
     					<a href="<?php echo base_url('index.php/works');?>">Work Schedule</a>
     				</li>
     				<li class="comments">
-    					<a href="<?php echo base_url('index.php/expense');?>">Expense</a>
+    					<a href="<?php echo base_url('index.php/expenses');?>">Expense</a>
     				</li>
     			</ul>
 

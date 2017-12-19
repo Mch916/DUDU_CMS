@@ -6,17 +6,17 @@
         <div class="row">
             <div class="col-md-6 form-group">
                 <label>From date:</label>
-                <input type="date" name="fromDate" class="form-control">
+                <input type="text" name="fromDate" class="form-control" id="fromDate">
             </div>
             <div class="col-md-6 form-group">
                 <label>To date:</label>
-                <input type="date" name="toDate" class="form-control">
+                <input type="text" name="toDate" class="form-control" id="toDate">
             </div>
         </div>
         <button id="searchBtn" class="btn btn-success">Search</button>
         <button id="addExpenseBtn" class="btn btn-primary pull-right">Add Expense</button>
     </div>
-    <table class="table table-hover table-responsive" style="font-size:1em;">
+    <table class="table table-hover table-responsive" style="font-size:1em;" id="expenseTable">
         <thead>
             <tr class="info">
                 <th>Column heading</th>
@@ -72,3 +72,34 @@
         </tbody>
     </table>
 </div>
+
+<script>
+$(document).ready(function() {
+    $('#searchBtn').click(function (){
+        console.log('here');
+        $.ajax({
+            url: '<?php echo site_url('expenses/get_expenses'); ?>',
+            data: {
+                from: $('#fromDate').val() ,
+                to: $('#toDate').val()
+            },
+
+            dataType: 'json',
+            success: function(data) {
+                $.fn.dispayTable(data);
+            },
+            error: function(){
+                console.log('fail to ajax');
+            }
+
+        });
+    });
+
+    $.fn.dispayTable = function (data) {
+        console.log('hihi');
+        var expenseData = data;
+        console.log(expenseData);
+
+    }
+});
+</script>
