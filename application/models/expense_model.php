@@ -12,7 +12,8 @@ class Expense_model extends CI_Model
 
     public function get_expenses($fromDate, $toDate)
     {
-        $query = $this->db->where('expense_date >=', $fromDate)->where('expense_date <=', $toDate)->get('expense');
+        $query = $this->db->select('*')->from('expense')->join('staff', 'staff.staffID = expense.staff_id')->
+        where('expense_date >=', $fromDate)->where('expense_date <=', $toDate)->get();
         return $query->result_array();
     }
 }
