@@ -15,7 +15,6 @@
 <div class="modal-dialog" role="document">
 <div class="modal-content">
   <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="myModalLabel">Add Booking</h4>
   </div>
   <div class="modal-body">
@@ -122,7 +121,6 @@
 <div class="modal-dialog" role="document">
 <div class="modal-content">
   <div class="modal-header">
-    <button type="button" class="close editModalClose" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title bookingDetailBox">Booking Detail</h4>
     <h4 class="modal-title bookingEditBox">Update Calendar Event</h4>
   </div>

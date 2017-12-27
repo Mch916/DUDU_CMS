@@ -57,7 +57,7 @@
     					</a>
     					<ul>
     						<li><a href="<?php echo site_url('users/change_pw');?>">Edit Account</a></li>
-    						<li><a href="<?php echo base_url('index.php/users/logout');?>">Logout</a></li>
+    						<li><a href="<?php echo base_url('users/logout');?>">Logout</a></li>
     					</ul>
     				</li>
           <?php endif; ?>
