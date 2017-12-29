@@ -7,7 +7,6 @@
         <!-- external javascript files -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('js/jquery.menu-aim.js');?>" ></script>
-        <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url('js/main.js');?>" ></script>
         <script type="text/javascript" src="<?php echo base_url('js/modernizr.js');?>" ></script>
         <script type="text/javascript" src="<?php echo base_url('js/common.js');?>" ></script>
@@ -16,7 +15,6 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/sidebar.css');?>">
         <link rel="stylesheet" type="text/css" href="<?php echo base_url('css/mobile.css');?>">
         <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
         <style>
           .fc-content {
             cursor: pointer;

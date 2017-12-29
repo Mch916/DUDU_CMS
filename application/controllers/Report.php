@@ -16,14 +16,23 @@ class Report extends CI_Controller
               redirect('users/login');
           }
 
+          $data['staff'] = $this->work_model->get_staff();
+
           $this->load->view('templates/rheader');
-          $this->load->view('report.php');
+          $this->load->view('report.php',$data);
           $this->load->view('templates/rfooter');
     }
 
     public function load_report_data()
     {
-        $booking_record = $this->booking_model->get_events('2017-12-01 00:00:00','2018-01-01 00:00:00')->result();
+        $fromDate = $this->input->post('from');
+        $toDate = $this->input->post('to');
+        $payment = $this->input->post('payment');
+        $confirm = $this->input->post('confirm');
+        $depositAcc = $this->input->post('depositacc');
+        $finalAcc = $this->input->post('finalacc');
+
+        $booking_record = $this->booking_model->reportData($fromDate, $toDate, $payment, $confirm, $depositAcc, $finalAcc)->result();
 
         $data = array();
 

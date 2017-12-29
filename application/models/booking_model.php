@@ -37,11 +37,29 @@ class Booking_Model extends CI_Model
         $this->db->where("ID", $id)->delete("booking");
       }
 
-      // public function get_acc()
-      // {
-      //   return $this->db->get("account")->result_array();
-      // }
+      public function reportData($start, $end, $payment, $confirm, $depositAcc, $finalAcc)
+      {
+          $array = array('start >=' => $start, 'end <=' => $end);
 
+          if ($payment != 'all') {
+              $array['payment_status'] = $payment;
+          }
+
+          if ($confirm != 'all') {
+              $array['isConfirm'] = $confirm;
+          }
+
+          if ($depositAcc != 'all') {
+              $array['deposit_acc'] = $depositAcc;
+          }
+
+          if ($finalAcc != 'all') {
+              $array['final_acc'] = $finalAcc;
+          }
+
+          $this->db->where($array);
+          return $this->db->get('booking');
+      }
 }
 
 ?>

@@ -139,43 +139,15 @@ jQuery(document).ready(function(){
     //           alert('Ajax request 發生錯誤');
     //         },
     //         success: function(response) {
-    //
-	// 			console.log(JSON.stringify(response));
+	//
+	//
     //             $('.report_data').html(JSON.stringify(response));
     //             $('.report_data').fadeIn();
-    //
+	// 			console.log(JSON.stringify(response));
     //         }
     //     });
     // };
 	// load_report_data();
-
-	var table = $('#example').DataTable( {
-        "processing": false,
-        "serverSide": false,
-		"scrollX": true,
-		"paging":   true,
-        "ordering": true,
-        "info":     false,
-        "ajax": {
-            "url": "load_report_data",
-            "type": "POST"
-        },
-        "columns": [
-            { "data": "id" },
-			{ "data": "title" },
-			{ "data": "end" },
-			{ "data": "start" },
-			{ "data": "people" },
-			{ "data": "drinks" },
-			{ "data": "isConfirm" },
-			{ "data": "total_amt" },
-			{ "data": "deposit" },
-			{ "data": "payment_status" },
-			{ "data": "deposit_acc" },
-			{ "data": "final_acc" },
-			{ "data": "remarks" }
-        ]
-    } );
 
 // 	// Create the select list and search operation
 // var select = $('<select />')
