@@ -49,7 +49,6 @@
             </div>
         </div>
         <button id="searchBtn" class="btn btn-success" style="font-size:12px;">Search</button>
-        <span id="loadingMsg"></span>
     </div>
     <div class="report_content_wrap" id="report">
 
@@ -95,6 +94,7 @@
             </tfoot>
         </table>
     </div>
+    <div style="height:50vh; background-color:#ffffff;"><div>
 
 </div>
 <script>

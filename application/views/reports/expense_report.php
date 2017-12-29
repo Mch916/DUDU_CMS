@@ -50,7 +50,7 @@
             </tfoot>
         </table>
     </div>
-
+    <div style="height:50vh; background-color:#ffffff;"><div>
 </div>
 <script>
 $(document).ready( function() {
