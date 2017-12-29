@@ -36,12 +36,6 @@
             <header class="cd-main-header" style="z-index:10;">
     		<a href="#0" class="cd-logo"><img src="<?php echo base_url('image/cd-logo.svg');?>" alt="Logo"></a>
 
-    		<!-- <div class="cd-search is-hidden">
-    			<form action="#0">
-    				<input type="search" placeholder="Search...">
-    			</form>
-    		</div> cd-search -->
-
     		<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
     		<nav class="cd-nav">
@@ -87,8 +81,9 @@
     				<li class="has-children bookmarks">
     					<a href="#0">Report</a>
     					<ul>
-    						<li><a href="<?php echo site_url('report/index');?>">Party Room</a></li>
-    						<li><a href="#0">Income</a></li>
+    						<li><a href="<?php echo site_url('report/booking');?>">Booking</a></li>
+    						<li><a href="<?php echo site_url('report/working');?>">Working</a></li>
+                            <li><a href="<?php echo site_url('report/expense');?>">Expense</a></li>
     					</ul>
     				</li>
             <?php if($this->session->userdata('username') == 'admin') : ?>

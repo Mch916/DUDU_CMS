@@ -42,6 +42,18 @@ class Work_model extends CI_model
       public function delete_works($id) {
             $this->db->where('ID',$id)->delete('workrecord');
       }
+
+      public function reportData($start, $end, $staff)
+      {
+          $array = array('start >=' => $start, 'end <=' => $end);
+
+          if ($staff != 'all') {
+              $array['staffID'] = $staff;
+          }
+
+          $this->db->where($array);
+          return $this->db->get('workrecord');
+      }
 }
 
  ?>

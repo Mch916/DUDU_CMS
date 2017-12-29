@@ -49,7 +49,7 @@
             </div>
         </div>
         <button id="searchBtn" class="btn btn-success" style="font-size:12px;">Search</button>
-        <span id="loadingMsg">Hello</span>
+        <span id="loadingMsg"></span>
     </div>
     <div class="report_content_wrap" id="report">
 
@@ -109,7 +109,7 @@ $(document).ready( function() {
         "order": [[1,'asc']],
         "ajax": {
             'type': 'POST',
-            'url': '<?php echo site_url("report/load_report_data") ?>',
+            'url': '<?php echo site_url("report/load_booking_report_data") ?>',
             'data': function (d) {
                 d.from = $('#fromDate').val();
                 d.to = $('#toDate').val();
@@ -176,7 +176,7 @@ $(document).ready( function() {
             "order": [[1,'asc']],
             "ajax": {
                 'type': 'POST',
-                'url': '<?php echo site_url("report/load_report_data") ?>',
+                'url': '<?php echo site_url("report/load_booking_report_data") ?>',
                 'data': function (d) {
                     d.from = $('#fromDate').val();
                     d.to = $('#toDate').val();
