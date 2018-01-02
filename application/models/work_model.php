@@ -43,7 +43,7 @@ class Work_model extends CI_model
             $this->db->where('ID',$id)->delete('workrecord');
       }
 
-      public function reportData($start, $end, $staff)
+      public function where_array($start, $end, $staff)
       {
           $array = array('start >=' => $start, 'end <=' => $end);
 
@@ -51,8 +51,85 @@ class Work_model extends CI_model
               $array['staffID'] = $staff;
           }
 
-          $this->db->where($array);
-          return $this->db->get('workrecord');
+          return $array;
+      }
+
+      public function all_work_count($fromDate,$toDate,$staff)
+      {
+          $array = $this->where_array($fromDate,$toDate,$staff);
+
+          $query = $this
+                  ->db
+                  ->where($array)
+                  ->get('workrecord');
+
+          return $query->num_rows();
+      }
+
+      public function all_work($limit,$start,$col,$dir,$fromDate,$toDate,$staff)
+      {
+          $array = $this->where_array($fromDate,$toDate,$staff);
+
+          $query = $this
+                  ->db
+                  ->where($array)
+                  ->order_by($col,$dir)
+                  ->get('workrecord');
+
+          if($query->num_rows()>0)
+          {
+              return $query->result();
+          }
+          else
+          {
+              return null;
+          }
+
+      }
+
+      public function work_search($limit,$start,$search,$col,$dir,$fromDate,$toDate,$staff)
+      {
+          $array = $this->where_array($fromDate,$toDate,$staff);
+
+          $query = $this
+                  ->db
+                  ->where($array)
+                  ->group_start()
+                  ->where('start LIKE', '%'.$search.'%')
+                  ->or_where('end LIKE', '%'.$search.'%')
+                  ->or_where('workRemark LIKE', '%'.$search.'%')
+                  ->or_where('staff LIKE', '%'.$search.'%')
+                  ->group_end()
+                  ->order_by($col,$dir)
+                  ->get('workrecord');
+
+
+          if($query->num_rows()>0)
+          {
+              return $query->result();
+          }
+          else
+          {
+              return null;
+          }
+      }
+
+      public function work_search_count($search,$fromDate,$toDate,$staff)
+      {
+          $array = $this->where_array($fromDate,$toDate,$staff);
+
+          $query = $this
+                  ->db
+                  ->where($array)
+                  ->group_start()
+                  ->where('start LIKE', '%'.$search.'%')
+                  ->or_where('end LIKE', '%'.$search.'%')
+                  ->or_where('workRemark LIKE', '%'.$search.'%')
+                  ->or_where('staff LIKE', '%'.$search.'%')
+                  ->group_end()
+                  ->get('workrecord');
+
+          return $query->num_rows();
       }
 }
 

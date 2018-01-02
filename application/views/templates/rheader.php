@@ -86,21 +86,21 @@
                             <li><a href="<?php echo site_url('report/expense');?>">Expense</a></li>
     					</ul>
     				</li>
-            <?php if($this->session->userdata('username') == 'admin') : ?>
-    				<li class="has-children users">
-    					<a href="#0">Users</a>
-              <ul>
-    						<li><a href="<?php echo site_url('users/create');?>">Create User</a></li>
-    						<li><a href="<?php echo site_url('users/edit');?>">Edit User</a></li>
-    					</ul>
-    				</li>
-            <?php endif; ?>
+                    <?php if($this->session->userdata('username') == 'admin') : ?>
+        				<li class="has-children users">
+        					<a href="#0">Users</a>
+                            <ul>
+        						<li><a href="<?php echo site_url('users/create');?>">Create User</a></li>
+        						<li><a href="<?php echo site_url('users/edit');?>">Edit User</a></li>
+        					</ul>
+        				</li>
+                    <?php endif; ?>
     			</ul>
 
-                <ul>
+                <!-- <ul>
     				<li class="cd-label">Action</li>
     				<li class="action-btn"><a href="<?php echo base_url('index.php/dashboard');?>">+ Button</a></li>
-    			</ul>
+    			</ul> -->
     		</nav>
       <?php endif; ?>
 

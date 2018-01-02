@@ -25,46 +25,50 @@
     </div>
     <div class="report_content_wrap" id="report">
 
-        <table id="example1" class="display" cellspacing="0" width="100%" style="font-size:12px;">
-            <thead>
-                <tr>
-                    <th>Expense Date</th>
-                    <th>Staff</th>
-                    <th>Expense Item</th>
-                    <th>Expense Amount</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th style="text-align:right">Total:</th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <th>Expense Date</th>
-                    <th>Staff</th>
-                    <th>Expense Item</th>
-                    <th>Expense Amount</th>
-                </tr>
-            </tfoot>
+        <table id="example" class="display" cellspacing="0" width="100%" style="font-size: 12px;">
+                <thead>
+                    <tr>
+                        <th>Expense Date</th>
+                        <th>Staff</th>
+                        <th>Expense Item</th>
+                        <th>Expense Amount</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th style="text-align:right">Total:</th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <th>Expense Date</th>
+                        <th>Staff</th>
+                        <th>Expense Item</th>
+                        <th>Expense Amount</th>
+                    </tr>
+                </tfoot>
         </table>
     </div>
-    <div style="height:50vh; background-color:#ffffff;"><div>
 </div>
+
 <script>
-$(document).ready( function() {
-    var example_table =
-    $('#example1').DataTable( {
-        "scrollX": true,
-        "paging":   true,
-        "ordering": true,
-        "info":     false,
+$(document).ready(function() {
+    $('.form_datetime').datetimepicker({
+        format: 'yyyy-mm-dd',
+        minView: 2,
+        autoclose: true
+    });
+
+    var table = $('#example').DataTable( {
+        "processing": true,
+        "serverSide": true,
         "stateSave": false,
-        "order": [[0,'asc']],
+        "paging": false,
         "ajax": {
+            "dataType": "json",
             'type': 'POST',
-            'url': '<?php echo site_url("report/load_expense_report_data") ?>',
+            'url': '<?php echo site_url("report/load_expense_report_data"); ?>',
             'data': function (d) {
                 d.from = $('#fromDate').val();
                 d.to = $('#toDate').val();
@@ -77,11 +81,6 @@ $(document).ready( function() {
             { "data": "expense_item" },
             { "data": "expense_amt" }
         ],
-        dom: 'Bfrtip',
-        buttons: [
-            { extend: 'excelHtml5', footer: true },
-            { extend: 'csvHtml5', footer: true }
-        ],
         "footerCallback": function(row, data, start, end, display) {
             var api = this.api();
             var Total = api.column(3).data().reduce( function (a, b)
@@ -90,61 +89,18 @@ $(document).ready( function() {
                                 }, 0 );
 
             $(api.column(3).footer()).html('$' + Total);
-        }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+            { extend: 'excelHtml5', footer: true },
+            { extend: 'csvHtml5', footer: true }
+        ]
     } );
 
-    $('.form_datetime').datetimepicker({
-        format: 'yyyy-mm-dd',
-        minView: 2,
-        autoclose: true
-    });
-
     $('#searchBtn').click(function() {
-
-        example_table.destroy();
-
-        example_table = $('#example1').DataTable( {
-            "scrollX": true,
-            "paging":   true,
-            "ordering": true,
-            "info":     false,
-            "stateSave": false,
-            "order": [[0,'asc']],
-            "ajax": {
-                'type': 'POST',
-                'url': '<?php echo site_url("report/load_expense_report_data") ?>',
-                'data': function (d) {
-                    d.from = $('#fromDate').val();
-                    d.to = $('#toDate').val();
-                    d.staff = $('#staffSelect').val();
-                }
-            },
-            "columns": [
-                { "data": "expense_date" },
-                { "data": "staff" },
-                { "data": "expense_item" },
-                { "data": "expense_amt" }
-            ],
-            dom: 'Bfrtip',
-            buttons: [
-                { extend: 'excelHtml5', footer: true },
-                { extend: 'csvHtml5', footer: true }
-            ],
-            "footerCallback": function(row, data, start, end, display) {
-                var api = this.api();
-                var Total = api.column(3).data().reduce( function (a, b)
-                                    {
-                                        return parseInt(a) + parseInt(b);
-                                    }, 0 );
-
-                $(api.column(3).footer()).html('$' + Total);
-            }
-        });
-
+        table.draw();
     });
-
-});
-
+} );
 </script>
 <script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>

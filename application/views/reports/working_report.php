@@ -52,18 +52,16 @@
             </tfoot>
         </table>
     </div>
-    <div style="height:50vh; background-color:#ffffff;"><div>
 </div>
 <script>
 $(document).ready( function() {
     var example_table =
     $('#example1').DataTable( {
-        "scrollX": true,
-        "paging":   true,
-        "ordering": true,
-        "info":     false,
+        "processing": true,
+        "serverSide": true,
         "stateSave": false,
-        "order": [[0,'asc']],
+        "paging":   false,
+        "order": [0,'asc'],
         "ajax": {
             'type': 'POST',
             'url': '<?php echo site_url("report/load_working_report_data") ?>',
@@ -104,46 +102,7 @@ $(document).ready( function() {
 
     $('#searchBtn').click(function() {
 
-        example_table.destroy();
-
-        example_table = $('#example1').DataTable( {
-            "scrollX": true,
-            "paging":   true,
-            "ordering": true,
-            "info":     false,
-            "stateSave": false,
-            "order": [[0,'asc']],
-            "ajax": {
-                'type': 'POST',
-                'url': '<?php echo site_url("report/load_working_report_data") ?>',
-                'data': function (d) {
-                    d.from = $('#fromDate').val();
-                    d.to = $('#toDate').val();
-                    d.staff = $('#staffSelect').val();
-                }
-            },
-            "columns": [
-                { "data": "start" },
-                { "data": "end" },
-                { "data": "staff" },
-                { "data": "workRemark" },
-                { "data": "pay" }
-            ],
-            dom: 'Bfrtip',
-            buttons: [
-                { extend: 'excelHtml5', footer: true },
-                { extend: 'csvHtml5', footer: true }
-            ],
-            "footerCallback": function(row, data, start, end, display) {
-                var api = this.api();
-                var salaryTotal = api.column(4).data().reduce( function (a, b)
-                                    {
-                                        return parseInt(a) + parseInt(b);
-                                    }, 0 );
-
-                $(api.column(4).footer()).html('$' + salaryTotal);
-            }
-        });
+        example_table.draw();
 
     });
 

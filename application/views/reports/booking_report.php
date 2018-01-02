@@ -94,22 +94,21 @@
             </tfoot>
         </table>
     </div>
-    <div style="height:50vh; background-color:#ffffff;"><div>
 
 </div>
 <script>
 $(document).ready( function() {
     var example_table =
     $('#example1').DataTable( {
-        "scrollX": true,
-        "paging":   true,
-        "ordering": true,
-        "info":     false,
+        "processing": true,
+        "serverSide": true,
         "stateSave": false,
-        "order": [[1,'asc']],
+        "paging": false,
+        "order": [1,'asc'],
         "ajax": {
+            "dataType": "json",
             'type': 'POST',
-            'url': '<?php echo site_url("report/load_booking_report_data") ?>',
+            'url': '<?php echo site_url("report/load_booking_report_data"); ?>',
             'data': function (d) {
                 d.from = $('#fromDate').val();
                 d.to = $('#toDate').val();
@@ -162,73 +161,7 @@ $(document).ready( function() {
     });
 
     $('#searchBtn').click(function() {
-
-        example_table.destroy();
-        // $('#example1').remove();
-        // $('#loadingMsg').text('Loading...Please wait...');
-        // $('#report').append(table);
-        example_table = $('#example1').DataTable( {
-            "scrollX": true,
-            "paging":   true,
-            "ordering": true,
-            "info":     false,
-            "stateSave": false,
-            "order": [[1,'asc']],
-            "ajax": {
-                'type': 'POST',
-                'url': '<?php echo site_url("report/load_booking_report_data") ?>',
-                'data': function (d) {
-                    d.from = $('#fromDate').val();
-                    d.to = $('#toDate').val();
-                    d.payment = $('#paymentSelect').val();
-                    d.confirm = $('#confirmSelect').val();
-                    d.depositacc = $('#depositSelect').val();
-                    d.finalacc = $('#finalSelect').val();
-                }
-            },
-            "columns": [
-                { "data": "title" },
-                { "data": "start" },
-                { "data": "end" },
-                { "data": "people" },
-                { "data": "drinks" },
-                { "data": "isConfirm" },
-                { "data": "payment_status" },
-                { "data": "deposit_acc" },
-                { "data": "final_acc" },
-                { "data": "remarks" },
-                { "data": "deposit" },
-                { "data": "total_amt" }
-            ],
-            dom: 'Bfrtip',
-            buttons: [
-                { extend: 'excelHtml5', footer: true },
-                { extend: 'csvHtml5', footer: true },
-                { extend: 'pdfHtml5', footer: true }
-            ],
-            "footerCallback": function(row, data, start, end, display) {
-                var api = this.api();
-                var grossTotal = api.column(11).data().reduce( function (a, b)
-                                    {
-                                        return parseInt(a) + parseInt(b);
-                                    }, 0 );
-                var depositTotal = api.column(10).data().reduce( function (a, b)
-                                    {
-                                        return parseInt(a) + parseInt(b);
-                                    }, 0 );
-
-                $(api.column(10).footer()).html('$' + depositTotal);
-                $(api.column(11).footer()).html('$' + grossTotal);
-                $(api.column(2).footer()).html('$' + (grossTotal - depositTotal));
-            }
-        });
-
-        // $('#loadingMsg').text('');
-
-    });
-
-    $('#example1').ready(function() {
-        $('#loadingMsg').text('');
+        example_table.draw();
     });
 
 });

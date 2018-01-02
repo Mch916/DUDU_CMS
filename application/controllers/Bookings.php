@@ -102,6 +102,9 @@ class Bookings extends CI_Controller
 
             if ($payment == 'Deposit') {
                 $final_acc = "";
+            }else if($payment == 'NA') {
+                $deposit_acc = "";
+                $final_acc = "";
             }
 
             $this->booking_model->add_event(array(
