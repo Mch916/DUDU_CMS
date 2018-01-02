@@ -34,7 +34,9 @@
     </head>
         <body>
             <header class="cd-main-header" style="z-index:10;">
-    		<a href="#0" class="cd-logo"><img src="<?php echo base_url('image/cd-logo.svg');?>" alt="Logo"></a>
+    		<a href="#0" class="cd-logo" style="color: #fff; text-decoration: none; font-size:2rem;">
+                DUDU Partyroom Booking Management System
+            </a>
 
     		<a href="#0" class="cd-nav-trigger">Menu<span></span></a>
 
